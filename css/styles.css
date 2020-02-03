@@ -1,0 +1,187 @@
+:root {
+  --header-height: 60px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+header {
+  background-color: white;
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  text-align: center;
+}
+
+.page-top {
+  padding-top: var(--header-height);
+}
+
+.button {
+  text-transform: capitalize;
+  margin: 10px auto;
+  text-align: center;
+  font-family: arial;
+  font-size: 12px;
+  display: block;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 400px;
+  min-width: 200px;
+  height: 30px;
+  transition: 0.3s opacity;
+}
+
+.button:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.button:focus {
+  outline: none;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+#submit-button {
+  margin-right: 0;
+  width: 30px;
+}
+
+form {
+  margin: 20px auto;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-element {
+  padding-bottom: 10px;
+}
+
+input {
+  font-family: arial;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  min-width: 100px;
+  height: 30px;
+  padding: 5px;
+  margin-top: 3px;
+
+
+}
+
+.label {
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+  border-radius: 5px;
+}
+
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* styling for a modal*/
+
+#modal-container {
+  display: none;
+}
+
+#modal-container.is-visible {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  text-align: center;
+  box-sizing: border-box;
+  animation: fadein 0.5s;
+}
+
+.modal {
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 15px;
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+}
+
+.close-modal {
+  float: right;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  color: #777;
+  text-decoration: underline;
+}
+
+.modal-content {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.modal-left {
+  padding-left: 60px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal h1 {
+  text-transform: capitalize;
+  margin-top: 0;
+  border: none;
+  text-align: left;
+}
+
+#modal-image img {
+  width: 300px;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media all and (max-width: 500px) {
+  .modal-content {
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .modal {
+    width: 320px;
+  }
+  .modal-left {
+    padding-left: 0;
+    margin: 0 auto;
+  }
+}

@@ -26,32 +26,32 @@ var dogBreeds = (function() {
   }
 */
   function loadList() {
-    $.ajax(apiUrl, {dataType: 'json' }).then(function(responseJSON) {
+    $.ajax(apiUrl2, {dataType: 'json' }).then(function(responseJSON) {
       return responseJSON;
     }).then(function(json) {
-
-/*
-      json.results.forEach(function (item) {
-        var pokemon = {
-          name: item.name,
-          detailsUrl: item.url
-        };
-        add(pokemon);
-      });
-*/
       $.each(json.results, function(index, item) {
         var dog = {
-          name: Object.keys(item)
+          name: item.name,
+          detailsUrl = item.url
         };
         add(dog);
-      })
-
-
-
+      });
     }).catch(function (e) {
       console.log(e);
     })
   };
+
+
+
+  function showDetails(item) {
+    var $textContainer = $('.modal-left');
+    var $imageContainer = $('#modal-image');
+    dogBreeds.loadDetails(item).then(function() {
+      $textContainer.innerHTML ='';
+      $imageContainer.innerHTML ='';
+      $modalName.add()
+    })
+  }
 
   return {
     add: add,

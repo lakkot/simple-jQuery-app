@@ -41,7 +41,6 @@ header {
 }
 
 .button:hover {
-  text-decoration: underline;
   opacity: 0.8;
   cursor: pointer;
   opacity: 0.5;
@@ -120,7 +119,7 @@ li {
   display: grid;
   text-align: center;
   box-sizing: border-box;
-  animation: fadein 0.5s;
+  animation: fadein 0.7s;
 }
 
 .modal {

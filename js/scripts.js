@@ -16,14 +16,16 @@ var pokemonRepository = (function() {
   }
 
 
-  function addListItem(pokemon) {
+  function addListItem(item) {
     var listContainer = $('ul');
     var listItem = $('<li></li>');
     listContainer.append(listItem);
     var listButton = $("<button class='button'></button>");
-    listButton.text(pokemon.name);
+    listButton.text(item.name);
     listItem.append(listButton);
-    //$listButton.on('click', () => {});
+    listButton.on('click', () => {
+      showDetails(item);
+    });
   }
 
   function loadList() {
@@ -40,14 +42,9 @@ var pokemonRepository = (function() {
     })
   };
 
-
-
-
   function loadDetails(item) {
     var url = item.detailsUrl;
-    $.ajax(url, {dataType: 'json'}).then(function(responseJSON) {
-      return responseJSON;
-    }).then(function(details) {
+    return $.ajax(url).then(function(details) {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = Object.keys(details.types);
@@ -57,21 +54,60 @@ var pokemonRepository = (function() {
     });
   };
 
-  function showDetails(item) {
+  function showDetails (item) {
+    loadDetails(item).then( () => {
     var $textContainer = $('.modal-left');
     var $imageContainer = $('#modal-image');
-    pokemonRepository.loadDetails(item).then(function() {
-      $textContainer.innerHTML ='';
-      $imageContainer.innerHTML ='';
-      $modalName.add()
-    })
-  }
+    $textContainer.html('');
+    $imageContainer.html('');
+    var modalName = $('<h1></h1>');
+    modalName.text(item.name);
+    $textContainer.append(modalName);
+    var modalHeight = $('<p></p>');
+    modalHeight.text('Height: ' + item.height + '0 centimeters');
+    $textContainer.append(modalHeight);
+    var modalInfo = $('<p></p>');
+    var modalImage = $('<img></img>');
+    modalImage.attr('src', item.imageUrl);
+    $imageContainer.append(modalImage);
+/*
+    function addAbilities(item) {
+      for (i = 0; i < item.abilities.length; i++) {
+        abilitiesArray.push(' ' + item.abilities[i].ability.name);
+      }
+    };
+      addAbilities(item);
+      modalInfo.text('Abilities:' + abilitiesArray);
+      $textContainer.append(modalInfo);
+*/
+      $modalContainer.addClass('is-visible');
+  })};
+
+  $('.close-modal').on('click', () => {
+    $modalContainer.removeClass('is-visible');
+  })
+
+  $(window).on('keydown', (e) => {
+    if(e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
+      $modalContainer.removeClass('is-visible');
+    }
+  })
+
+
+  $modalContainer.on('click', (e) => {
+    var target = e.target;
+    var modalContainer = document.querySelector('#modal-container');
+    if (target === modalContainer) {
+      $modalContainer.removeClass('is-visible');
+    }
+  })
 
   return {
     add: add,
     getAll: getAll,
     loadList: loadList,
-    addListItem: addListItem
+    laodDetails: loadDetails,
+    addListItem: addListItem,
   }
 
 }());

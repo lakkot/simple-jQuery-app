@@ -20,7 +20,7 @@ var pokemonRepository = (function() {
     var listContainer = $('ul');
     var listItem = $('<li></li>');
     listContainer.append(listItem);
-    var listButton = $("<button class='button'></button>");
+    var listButton = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokemon-modal"></button>');
     listButton.text(item.name);
     listItem.append(listButton);
     listButton.on('click', () => {
@@ -56,20 +56,27 @@ var pokemonRepository = (function() {
   //show modal and fill it with info from loadDetail function
   function showDetails (item) {
     loadDetails(item).then( () => {
+    var $modalTitle = $('.modal_title');
+    var $modalBody = $('.modal-body');
     var $textContainer = $('.modal-left');
-    var $imageContainer = $('#modal-image');
+    var $imageContainer = $('.modal-right');
+
     $textContainer.html('');
     $imageContainer.html('');
-    var modalName = $('<h1></h1>');
+    $modalTitle.html('');
+    //$modalBody.html('');
+
+    var modalName = $('<h5 class="modal-title" id="modal-title"></h5>');
     modalName.text(item.name);
-    $textContainer.append(modalName);
+    $modalTitle.append(modalName);
+
+
+
     var modalHeight = $('<p></p>');
     modalHeight.text('Height: ' + item.height + '0 centimeters');
     $textContainer.append(modalHeight);
-    var modalInfo = $('<p></p>');
-    var modalImage = $('<img></img>');
-    modalImage.attr('src', item.imageUrl);
-    $imageContainer.append(modalImage);
+
+
     var abilitiesArray = [];
     function addAbilities(item) {
       for (i = 0; i < item.abilities.length; i++) {
@@ -77,31 +84,18 @@ var pokemonRepository = (function() {
       }
     };
     addAbilities(item);
+
+    var modalInfo = $('<p></p>');
     modalInfo.text('Abilities:' + abilitiesArray);
     $textContainer.append(modalInfo);
-    $modalContainer.addClass('is-visible');
+
+
+    var modalImage = $('<img class="poke-image"></img>');
+    modalImage.attr('src', item.imageUrl);
+    $imageContainer.append(modalImage);
+
   })};
 
-  //close modal on cliking close button
-  $('.close-modal').on('click', () => {
-    $modalContainer.removeClass('is-visible');
-  })
-
-  //close modal on hitting escape
-  $(window).on('keydown', (e) => {
-    if(e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
-      $modalContainer.removeClass('is-visible');
-    }
-  })
-
-  //close modal on cliking outside teh modal window
-  $modalContainer.on('click', (e) => {
-    var target = e.target;
-    var modalContainer = document.querySelector('#modal-container');
-    if (target === modalContainer) {
-      $modalContainer.removeClass('is-visible');
-    }
-  })
   //make functions available outside IIFE
   return {
     add: add,

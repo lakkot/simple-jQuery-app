@@ -70,7 +70,7 @@ var pokemonRepository = (function() {
     var modalImage = $('<img></img>');
     modalImage.attr('src', item.imageUrl);
     $imageContainer.append(modalImage);
-/*
+    var abilitiesArray = [];
     function addAbilities(item) {
       for (i = 0; i < item.abilities.length; i++) {
         abilitiesArray.push(' ' + item.abilities[i].ability.name);
@@ -79,7 +79,7 @@ var pokemonRepository = (function() {
       addAbilities(item);
       modalInfo.text('Abilities:' + abilitiesArray);
       $textContainer.append(modalInfo);
-*/
+
       $modalContainer.addClass('is-visible');
   })};
 

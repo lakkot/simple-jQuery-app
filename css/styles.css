@@ -3,7 +3,7 @@
 }
 
 .poke-image {
-  width: 200px;
+  min-height: 200px;
 }
 .modal-left {
   padding-top: 40px;

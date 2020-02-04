@@ -183,4 +183,7 @@ li {
     padding-left: 0;
     margin: 0 auto;
   }
+  .button {
+    max-width: 300px;
+  }
 }

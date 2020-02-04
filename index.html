@@ -12,25 +12,39 @@
   </head>
 
   <body>
-
-
-    <header>
-      <h1>Dog breeds</h1>
-    </header>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">Pokedex</a>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </nav>
 
     <div class='page-top'></div>
-      <div class="modal" id='modal-container'>
-        <div class=''>
-          <button class="close-modal" >close</button>
-          <div class='modal-content'>
-            <div class=''></div>
-            <div id="modal-image">
-              <img src="#" alt="pokemon photo">
-            </div>
-          </div>
 
+<div class="modal fade" id="pokemon-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal_title">
+          <h5 class="modal-title" id="modal-title">Modal title</h5>
         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 modal-left">.col-md-4</div>
+            <div class="col-md-6 ml-auto modal-right">.col-md-4 .ml-auto</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <ul class='pokemon-list'></ul>

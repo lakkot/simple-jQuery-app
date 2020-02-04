@@ -15,7 +15,7 @@ var pokemonRepository = (function() {
     return repository;
   }
 
-
+  //add item to list (active table)
   function addListItem(item) {
     var listContainer = $('ul');
     var listItem = $('<li></li>');
@@ -27,7 +27,7 @@ var pokemonRepository = (function() {
       showDetails(item);
     });
   }
-
+  //get list of items form API
   function loadList() {
     return $.ajax(apiUrl, {dataType: 'json' }).then(function(item) {
       $.each(item.results, function(index, item) {
@@ -41,7 +41,7 @@ var pokemonRepository = (function() {
       console.log(e);
     })
   };
-
+  //load item details from API (url obtained from previous api)
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url).then(function(details) {
@@ -53,7 +53,7 @@ var pokemonRepository = (function() {
       console.error(e);
     });
   };
-
+  //show modal and fill it with info from loadDetail function
   function showDetails (item) {
     loadDetails(item).then( () => {
     var $textContainer = $('.modal-left');
@@ -76,24 +76,25 @@ var pokemonRepository = (function() {
         abilitiesArray.push(' ' + item.abilities[i].ability.name);
       }
     };
-      addAbilities(item);
-      modalInfo.text('Abilities:' + abilitiesArray);
-      $textContainer.append(modalInfo);
-
-      $modalContainer.addClass('is-visible');
+    addAbilities(item);
+    modalInfo.text('Abilities:' + abilitiesArray);
+    $textContainer.append(modalInfo);
+    $modalContainer.addClass('is-visible');
   })};
 
+  //close modal on cliking close button
   $('.close-modal').on('click', () => {
     $modalContainer.removeClass('is-visible');
   })
 
+  //close modal on hitting escape
   $(window).on('keydown', (e) => {
     if(e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
       $modalContainer.removeClass('is-visible');
     }
   })
 
-
+  //close modal on cliking outside teh modal window
   $modalContainer.on('click', (e) => {
     var target = e.target;
     var modalContainer = document.querySelector('#modal-container');
@@ -101,7 +102,7 @@ var pokemonRepository = (function() {
       $modalContainer.removeClass('is-visible');
     }
   })
-
+  //make functions available outside IIFE
   return {
     add: add,
     getAll: getAll,
@@ -112,9 +113,7 @@ var pokemonRepository = (function() {
 
 }());
 
-console.log(pokemonRepository.getAll());
-
-
+//load list, then for each item from array add item to the printed list
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);

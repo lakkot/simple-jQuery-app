@@ -1,14 +1,14 @@
 
 
-var dogBreeds = (function() {
+var pokemonRepository = (function() {
 
   var repository = [];
-  var apiUrl = 'https://dog.ceo/api/breeds/list/all';
-  var apiUrl2 = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  //var apiUrl = 'https://dog.ceo/api/breeds/list/all';
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   var $modalContainer = $('#modal-container')
 
-  function add(dogBreed) {
-    repository.push(dogBreed);
+  function add(pokemon) {
+    repository.push(pokemon);
   }
   //see all items
   function getAll() {
@@ -16,70 +16,33 @@ var dogBreeds = (function() {
   }
 
 
-  function addListItem(dogBreed) {
-    var $listContainer = $('ul');
-    var $listItem = $('<li><button class="button">button</button></li>');
-    $listContainer.append('listItem');
-    //var $listButton = $("<button class='button'>button</button>")
-    //$listItem.append($listButton);
+  function addListItem(pokemon) {
+    var listContainer = $('ul');
+    var listItem = $('<li></li>');
+    listContainer.append(listItem);
+    var listButton = $("<button class='button'></button>");
+    listButton.text(pokemon.name);
+    listItem.append(listButton);
     //$listButton.on('click', () => {});
   }
-/*
-  function addListItem(listItem) {
-    //assign variable to ul list
-    var $pokemonMainList = document.querySelector('ul');
-    // assign variable to list item (not existing in html)
-    var $listItem = document.createElement('li');
-    // assign variable to button (not existing in html)
-    var $button = document.createElement('button');
-    // creating a conditional from what will be written inside the button
-    $button.innerText = listItem.name;
-    //adding a CSS class to the button
-    $button.classList.add('button');
-    //nesting list items inside a ul item
-    $pokemonMainList.appendChild($listItem);
-    //nesting a button inside the list item
-    $listItem.appendChild($button);
-    $button.addEventListener('click', function() {
-      showDetails(listItem);
-    });
-  }
-*/
-
 
   function loadList() {
-    $.ajax(apiUrl2, {dataType: 'json' }).then(function(responseJSON) {
-      return responseJSON;
-    }).then(function(json) {
-      $.each(json.results, function(index, item) {
-        var dog = {
-          name: item.name,
-          detailsUrl: item.url
-        };
-        add(dog);
-      });
-    }).catch(function (e) {
-      console.log(e);
-    })
-  };
-/*
-  function loadList() {
-    return fetch(apiUrl2).then(function(response) {
-      return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
+    return $.ajax(apiUrl, {dataType: 'json' }).then(function(item) {
+      $.each(item.results, function(index, item) {
         var pokemon = {
           name: item.name,
           detailsUrl: item.url
         };
         add(pokemon);
       });
-    }).catch(function (error) {
-        console.log(error);
-      })
-    };
-*/
-/*
+    }).catch(function (e) {
+      console.log(e);
+    })
+  };
+
+
+
+
   function loadDetails(item) {
     var url = item.detailsUrl;
     $.ajax(url, {dataType: 'json'}).then(function(responseJSON) {
@@ -97,13 +60,13 @@ var dogBreeds = (function() {
   function showDetails(item) {
     var $textContainer = $('.modal-left');
     var $imageContainer = $('#modal-image');
-    dogBreeds.loadDetails(item).then(function() {
+    pokemonRepository.loadDetails(item).then(function() {
       $textContainer.innerHTML ='';
       $imageContainer.innerHTML ='';
       $modalName.add()
     })
   }
-*/
+
   return {
     add: add,
     getAll: getAll,
@@ -113,11 +76,11 @@ var dogBreeds = (function() {
 
 }());
 
+console.log(pokemonRepository.getAll());
 
-console.log(dogBreeds.getAll());
 
-dogBreeds.loadList().then(function() {
-  dogBreeds.getAll().forEach(function(item) {
-    dogBreeds.addListItem(item);
+pokemonRepository.loadList().then(function() {
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
   });
 });

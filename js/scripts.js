@@ -17,12 +17,12 @@ var pokemonRepository = (function() {
 
   //add item to list (active table)
   function addListItem(item) {
-    var listContainer = $('ul');
-    var listItem = $('<li></li>');
-    listContainer.append(listItem);
-    var listButton = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokemon-modal"></button>');
+    var listContainer = $('.pokemon-list');
+    //var listItem = $('<li class="list-group-item"></li>');
+    //listContainer.append(listItem);
+    var listButton = $('<button type="button" class="btn btn-light col-3 poke-list" data-toggle="modal" data-target="#pokemon-modal"></button>');
     listButton.text(item.name);
-    listItem.append(listButton);
+    listContainer.append(listButton);
     listButton.on('click', () => {
       showDetails(item);
     });
@@ -57,14 +57,12 @@ var pokemonRepository = (function() {
   function showDetails (item) {
     loadDetails(item).then( () => {
     var $modalTitle = $('.modal_title');
-    var $modalBody = $('.modal-body');
     var $textContainer = $('.modal-left');
     var $imageContainer = $('.modal-right');
 
     $textContainer.html('');
     $imageContainer.html('');
     $modalTitle.html('');
-    //$modalBody.html('');
 
     var modalName = $('<h5 class="modal-title" id="modal-title"></h5>');
     modalName.text(item.name);
@@ -96,6 +94,15 @@ var pokemonRepository = (function() {
 
   })};
 
+  $(document).ready(function(){
+    $("#search-field").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(".poke-list").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
   //make functions available outside IIFE
   return {
     add: add,
@@ -106,6 +113,8 @@ var pokemonRepository = (function() {
   }
 
 }());
+
+
 
 //load list, then for each item from array add item to the printed list
 pokemonRepository.loadList().then(function() {

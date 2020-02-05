@@ -20,7 +20,7 @@ var pokemonRepository = (function() {
     var listContainer = $('.pokemon-list');
     //var listItem = $('<li class="list-group-item"></li>');
     //listContainer.append(listItem);
-    var listButton = $('<button type="button" class="btn btn-light col-3 poke-list" data-toggle="modal" data-target="#pokemon-modal"></button>');
+    var listButton = $('<button type="button" class="btn btn-light col-4 col-sm-3 col-md-2 poke-list" data-toggle="modal" data-target="#pokemon-modal"></button>');
     listButton.text(item.name);
     listContainer.append(listButton);
     listButton.on('click', () => {

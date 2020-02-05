@@ -12,17 +12,38 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand">Pokedex</a>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Pokedex</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              About me
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://michallichota.000webhostapp.com/">My portfolio</a>
+              <a class="dropdown-item" href="https://github.com/lakkot">My GitHub</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://www.instagram.com/streetsandshadows/">My Instagram</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search-field" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
     </nav>
 
-    <div class='page-top'></div>
+    <div class="page-top"></div>
 
-<div class="modal fade" id="pokemon-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="pokemon-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -36,8 +57,8 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-6 modal-left">.col-md-4</div>
-            <div class="col-md-6 ml-auto modal-right">.col-md-4 .ml-auto</div>
+            <div class="col-md-6 modal-left"></div>
+            <div class="col-md-6 ml-auto modal-right"></div>
           </div>
         </div>
 
@@ -47,7 +68,13 @@
 </div>
 
 
-    <ul class='pokemon-list'></ul>
+    <div class="pokemon-list row justify-content-center"></div>
+
+  <footer class="footer page-footer font-small">
+    <div class="text-center py-3">Pokedex jQuery app by:
+      <p> Michal Lichota</p>
+    </div>
+</footer>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

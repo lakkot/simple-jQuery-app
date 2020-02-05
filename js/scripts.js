@@ -94,6 +94,7 @@ var pokemonRepository = (function() {
 
   })};
 
+  //function to make the search field work
   $(document).ready(function(){
     $("#search-field").on("keyup", function() {
       var value = $(this).val().toLowerCase();
